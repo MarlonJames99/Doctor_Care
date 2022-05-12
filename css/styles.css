@@ -2,41 +2,73 @@
 
 * {
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 :root {
     font-size: 62.5%;
-    --primary-color: hsl(170, 100%, 26%);
+    --primary-color: hsl(0, 65%, 48%);
     --headline: hsl(210, 11%, 15%);
     --paragraph: hsl(210, 9%, 31%);
+    --brand-beige: hsl(0, 100%, 98%);
+    --brand-light: hsl(0, 100%, 95%);
+    --nav-height: 7.2rem;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
 }
 
 body {
     font-family: 'DM Sans', sans-serif;
     font-size: 1.6rem;
     text-align: center;
+    padding-inline: 2.4rem;
+    overflow: overlay;
+}
+
+ul {
+    list-style: none;
+}
+
+.wrapper {
+    width: 37.5rem;
+    margin-inline: auto;
+}
+
+header::before {
+    content: "";
+    width: 100%;
+    height: calc(108rem + var(--nav-height));
+    background-color: var(--brand-light);
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
 }
 
 header {
-    width: 37.5rem;
-    margin: 4.1rem auto 0 auto;
+    margin-top: calc(4.1rem + var(--nav-height));
 }
 
-h4 {
+header h4 {
     font-size: 1.4rem;
     color: var(--primary-color);
     margin-bottom: 1.6rem;
 }
 
-h1 {
+header h1 {
     font-size: 3.4rem;
     color: var(--headline);
     line-height: 130%;
     margin-bottom: 2.4rem;
 }
 
-p {
+header p {
     font-size: 1.8rem;
     line-height: 150%; 
     font-weight: 400;
@@ -44,7 +76,7 @@ p {
     margin-bottom: 3.2rem;
 }
 
-button {
+header button {
     background-color: var(--primary-color);
     border: none;
     border-radius: 4rem;
@@ -61,6 +93,165 @@ button {
     gap: 1.6rem;
 }
 
+#whatsapp {
+    width: 2rem;
+}
+
 #woman {
+    width: 26.4rem;
     display: block;
+    margin-inline: auto;
+}
+
+.stats {
+    width: 32.7rem;
+    margin-inline: auto;
+    background: var(--brand-beige);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6rem;
+    padding-block: 4rem;
+    border: solid 1px var(--brand-light);
+    border-radius: 0.6rem;
+}
+
+.stat h3 {
+    font-size: 4.8rem;
+    color: var(--headline);
+    line-height: 130%;
+    margin-bottom: 0.4rem;
+}
+
+.stat p {
+    margin: 0;
+    color: var(--primary-color);
+    line-height: 150%;
+    font-size: 1.6rem;
+}
+
+nav {
+    display: flex;
+    height: var(--nav-height);
+    position: fixed;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+}
+
+nav .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav.scroll {
+    background: var(--primary-color);
+    width: 100vw;
+}
+
+nav.scroll svg:nth-child(1) path {
+    fill: white;
+}
+
+nav.scroll button path {
+    stroke: white;
+}
+
+.menu ul:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+    gap: 4.8rem;
+    margin-top: 6rem;
+    font-weight: 700;
+    font-size: 2.4rem;
+    line-height: 3.1rem;
+}
+
+.menu ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.menu .button {
+    background-color: #fff;
+    border-radius: 4rem;
+    font-weight: 700;
+    font-size: 1.8rem;
+    line-height: 2.3rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--primary-color);
+    display: inline-block;
+    padding: 1.6rem 3.2rem;
+    margin-top: 4.8rem;
+    margin-bottom: 8rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 3.2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-links img {
+    width: 3.2rem;
+}
+
+nav button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+body.menu-expanded {
+    overflow: hidden;
+    padding: 0;
+}
+
+body.menu-expanded > :not(nav) {
+    display: none;
+}
+
+#close-menu img {
+    width: 4rem;
+    height: 4rem;
+}
+
+.menu,
+#close-menu,
+body.menu-expanded #open-menu {
+    opacity: 0;
+    visibility: hidden;
+}
+
+body.menu-expanded .menu,
+body.menu-expanded #close-menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+body.menu-expanded .menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--primary-color);
+    width: 100vw;
+    height: 100vh;
+    padding-top: var(--nav-height);
+}
+
+body.menu-expanded nav {
+    position: relative;
+}
+
+body.menu-expanded .logo,
+body.menu-expanded button {
+    position: relative;
+    z-index: 100;
+}
+
+body.menu-expanded .logo path {
+    fill: white;
 }
