@@ -8,12 +8,17 @@
 
 :root {
     font-size: 62.5%;
-    --primary-color: hsl(0, 65%, 48%);
+    --primary-color: hsl(255, 53%, 50%);
     --headline: hsl(210, 11%, 15%);
     --paragraph: hsl(210, 9%, 31%);
-    --brand-beige: hsl(0, 100%, 98%);
-    --brand-light: hsl(0, 100%, 95%);
+    --brand-beige: hsl(252, 100%, 97%);
+    --brand-light: hsl(257, 100%, 93%);
+    --bg-light: hsl(0, 0%, 98%);
     --nav-height: 7.2rem;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 html,
@@ -26,20 +31,182 @@ body {
     font-family: 'DM Sans', sans-serif;
     font-size: 1.6rem;
     text-align: center;
-    padding-inline: 2.4rem;
     overflow: overlay;
+    background: var(--bg-light);
+}
+
+.wrapper {
+    width: 37.5rem;
+    margin-inline: auto;
+    padding-inline: 2.4rem;
 }
 
 ul {
     list-style: none;
 }
 
-.wrapper {
-    width: 37.5rem;
-    margin-inline: auto;
+img {
+    max-width: 100%;
 }
 
-header::before {
+section {
+    padding-block: 10rem;
+}
+
+section header h4 {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    margin-bottom: 1.6rem;
+    font-weight: 700;
+    line-height: 150%;
+    letter-spacing: 0.08rem;
+    text-transform: uppercase;
+}
+
+section header h2 {
+    font-size: 3rem;
+    line-height: 3.9rem;
+    color: var(--headline);
+}
+
+section header h1 {
+    font-size: 3.4rem;
+    color: var(--headline);
+    line-height: 130%;
+    margin-bottom: 2.4rem;
+}
+
+section .content p {
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 150%;
+    color: var(--paragraph);
+}
+
+nav {
+    display: flex;
+    height: var(--nav-height);
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100vw;
+}
+
+nav .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav.scroll {
+    background: var(--primary-color);
+}
+
+nav.scroll .logo path {
+    fill: white;
+}
+
+nav.scroll button path {
+    stroke: white;
+}
+
+nav button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+body.menu-expanded {
+    overflow: hidden;
+}
+
+body.menu-expanded > :not(nav) {
+    visibility: hidden;
+}
+
+.menu,
+.close-menu,
+body.menu-expanded .open-menu {
+    display: none;
+}
+
+body.menu-expanded .menu,
+body.menu-expanded .close-menu {
+    display: initial;
+}
+
+.menu {
+    transform: translateX(-100%);
+}
+
+body.menu-expanded .menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: var(--primary-color);
+    width: 100vw;
+    height: 100vh;
+    padding-top: var(--nav-height);
+    transition: transform 300ms;
+    transform: translateX(0);
+}
+
+.menu ul:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+    gap: 4.8rem;
+    margin-top: 6rem;
+    font-weight: 700;
+    font-size: 2.4rem;
+    line-height: 3.1rem;
+}
+
+.menu ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.menu .button {
+    background-color: #fff;
+    border-radius: 4rem;
+    font-weight: 700;
+    font-size: 1.8rem;
+    line-height: 2.3rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--primary-color);
+    display: none;
+    padding: 1.6rem 3.2rem;
+    margin-top: 4.8rem;
+    margin-bottom: 8rem;
+}
+
+body.menu-expanded .menu .button {
+    display: inline-block;
+}
+
+.social-links {
+    display: flex;
+    gap: 3.2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-links img {
+    width: 3.2rem;
+}
+
+body.menu-expanded .logo,
+body.menu-expanded button {
+    position: relative;
+    z-index: 100;
+}
+
+body.menu-expanded .logo path {
+    fill: white;
+}
+
+#home::before {
     content: "";
     width: 100%;
     height: calc(108rem + var(--nav-height));
@@ -51,24 +218,11 @@ header::before {
     z-index: -1;
 }
 
-header {
-    margin-top: calc(4.1rem + var(--nav-height));
+#home {
+    padding-top: calc(4.1rem + var(--nav-height));
 }
 
-header h4 {
-    font-size: 1.4rem;
-    color: var(--primary-color);
-    margin-bottom: 1.6rem;
-}
-
-header h1 {
-    font-size: 3.4rem;
-    color: var(--headline);
-    line-height: 130%;
-    margin-bottom: 2.4rem;
-}
-
-header p {
+#home p {
     font-size: 1.8rem;
     line-height: 150%; 
     font-weight: 400;
@@ -76,13 +230,13 @@ header p {
     margin-bottom: 3.2rem;
 }
 
-header button {
+#home button {
     background-color: var(--primary-color);
     border: none;
     border-radius: 4rem;
+    padding: 1.6rem 2.4rem;
     margin: 0 auto 6rem auto;
-    height: 6.2rem;
-    width: 26.3rem;
+    width: fit-content;
     text-transform: uppercase;
     font-size: 1.4rem;
     font-weight: 700;
@@ -90,7 +244,7 @@ header button {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1.6rem;
+    gap: 1.2rem;
 }
 
 #whatsapp {
@@ -130,128 +284,39 @@ header button {
     font-size: 1.6rem;
 }
 
-nav {
-    display: flex;
-    height: var(--nav-height);
-    position: fixed;
-    left: 50%;
-    top: 0;
-    transform: translateX(-50%);
+#services header h2 {
+    margin-bottom: 6rem;
 }
 
-nav .wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-nav.scroll {
-    background: var(--primary-color);
-    width: 100vw;
-}
-
-nav.scroll svg:nth-child(1) path {
-    fill: white;
-}
-
-nav.scroll button path {
-    stroke: white;
-}
-
-.menu ul:nth-child(1) {
+#services .cards {
     display: flex;
     flex-direction: column;
-    gap: 4.8rem;
-    margin-top: 6rem;
-    font-weight: 700;
-    font-size: 2.4rem;
-    line-height: 3.1rem;
-}
-
-.menu ul li a {
-    color: white;
-    text-decoration: none;
-}
-
-.menu .button {
-    background-color: #fff;
-    border-radius: 4rem;
-    font-weight: 700;
-    font-size: 1.8rem;
-    line-height: 2.3rem;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: var(--primary-color);
-    display: inline-block;
-    padding: 1.6rem 3.2rem;
-    margin-top: 4.8rem;
-    margin-bottom: 8rem;
-}
-
-.social-links {
-    display: flex;
     gap: 3.2rem;
-    align-items: center;
-    justify-content: center;
 }
 
-.social-links img {
-    width: 3.2rem;
+#services .card {
+    padding: 2.4rem;
+    text-align: left;
+    background-color: #fff;
+    border: 0.1rem solid var(--brand-light);
+    border-radius: 0.6rem;
 }
 
-nav button {
-    background: none;
-    border: none;
-    cursor: pointer;
+#services .card h3 {
+    margin-block: 1.6rem;
 }
 
-body.menu-expanded {
-    overflow: hidden;
-    padding: 0;
+#about {
+    text-align: left;
+    background-color: var(--brand-beige);
+
 }
 
-body.menu-expanded > :not(nav) {
-    display: none;
+#about header h2 {
+    margin-bottom: 2.4rem;
 }
 
-#close-menu img {
-    width: 4rem;
-    height: 4rem;
-}
-
-.menu,
-#close-menu,
-body.menu-expanded #open-menu {
-    opacity: 0;
-    visibility: hidden;
-}
-
-body.menu-expanded .menu,
-body.menu-expanded #close-menu {
-    opacity: 1;
-    visibility: visible;
-}
-
-body.menu-expanded .menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    background: var(--primary-color);
-    width: 100vw;
-    height: 100vh;
-    padding-top: var(--nav-height);
-}
-
-body.menu-expanded nav {
-    position: relative;
-}
-
-body.menu-expanded .logo,
-body.menu-expanded button {
-    position: relative;
-    z-index: 100;
-}
-
-body.menu-expanded .logo path {
-    fill: white;
+#about .content p {
+    margin-top: 2.4rem;
+    margin-bottom: 6rem;
 }
