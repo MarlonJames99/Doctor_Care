@@ -8,11 +8,13 @@
 
 :root {
     font-size: 62.5%;
-    --primary-color: hsl(255, 53%, 50%);
+    --hue: 255;
+    --primary-color: hsl(var(--hue), 53%, 50%);
     --headline: hsl(210, 11%, 15%);
     --paragraph: hsl(210, 9%, 31%);
-    --brand-beige: hsl(252, 100%, 97%);
-    --brand-light: hsl(257, 100%, 93%);
+    --brand-beige: hsl(calc(var(--hue) - 3), 100%, 97%);
+    --brand-light: hsl(calc(var(--hue) + 2), 100%, 93%);
+    --brand-btn-hover: hsl(var(--hue), 68%, 30%);
     --bg-light: hsl(0, 0%, 98%);
     --nav-height: 7.2rem;
 }
@@ -83,6 +85,71 @@ section .content p {
     color: var(--paragraph);
 }
 
+.button {
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 4rem;
+    padding: 1.6rem 2.4rem;
+    margin-bottom: 6rem;
+    width: fit-content;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    text-decoration: none;
+    transition: background 200ms;
+}
+
+.button:hover {
+    background-color: var(--brand-btn-hover);
+}
+
+.social-links {
+    display: flex;
+    gap: 3.2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-links img {
+    width: 3.2rem;
+}
+
+#services .card circle {
+    fill: var(--brand-light);
+}
+
+#services .card path {
+    stroke: var(--primary-color);
+}
+
+#navigation .logo path[fill*='#5F3DC4'],
+#backToTopButton circle {
+    fill: var(--primary-color);
+}
+
+button.open-menu path[stroke*='#5F3DC4'],
+#contact li path {
+    stroke: var(--primary-color);
+}
+
+body.menu-expanded #navigation .logo path,
+#navigation.scroll .logo path {
+    fill: white;
+}
+
+#navigation.scroll button.open-menu path[stroke*='#5F3DC4'] {
+    stroke: white;
+}
+
+#backToTopBtn circle {
+    fill: var(--primary-color);
+}
+
 nav {
     display: flex;
     height: var(--nav-height);
@@ -120,17 +187,25 @@ body.menu-expanded {
     overflow: hidden;
 }
 
-body.menu-expanded > :not(nav) {
+body.menu-expanded> :not(nav) {
     visibility: hidden;
 }
 
 .menu,
-.close-menu,
 body.menu-expanded .open-menu {
+    opacity: 0;
+    visibility: hidden;
+}
+
+body.menu-expanded .menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+.close-menu {
     display: none;
 }
 
-body.menu-expanded .menu,
 body.menu-expanded .close-menu {
     display: initial;
 }
@@ -181,19 +256,14 @@ body.menu-expanded .menu {
     margin-bottom: 8rem;
 }
 
+.menu .button:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+    filter: brightness(1.3);
+}
+
 body.menu-expanded .menu .button {
     display: inline-block;
-}
-
-.social-links {
-    display: flex;
-    gap: 3.2rem;
-    align-items: center;
-    justify-content: center;
-}
-
-.social-links img {
-    width: 3.2rem;
 }
 
 body.menu-expanded .logo,
@@ -222,36 +292,23 @@ body.menu-expanded .logo path {
     padding-top: calc(4.1rem + var(--nav-height));
 }
 
+#home .button {
+    margin-inline: auto;
+}
+
 #home p {
     font-size: 1.8rem;
-    line-height: 150%; 
+    line-height: 150%;
     font-weight: 400;
     color: var(--paragraph);
     margin-bottom: 3.2rem;
-}
-
-#home button {
-    background-color: var(--primary-color);
-    border: none;
-    border-radius: 4rem;
-    padding: 1.6rem 2.4rem;
-    margin: 0 auto 6rem auto;
-    width: fit-content;
-    text-transform: uppercase;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.2rem;
 }
 
 #whatsapp {
     width: 2rem;
 }
 
-#woman {
+#doctor {
     width: 26.4rem;
     display: block;
     margin-inline: auto;
@@ -319,4 +376,76 @@ body.menu-expanded .logo path {
 #about .content p {
     margin-top: 2.4rem;
     margin-bottom: 6rem;
+}
+
+#contact {
+    text-align: left;
+}
+
+#contact header {
+    margin-bottom: 3.2rem;
+}
+
+#contact ul {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    margin-bottom: 3.2rem;
+}
+
+#contact ul li {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+footer {
+    background-color: var(--primary-color);
+    padding-block: 6rem;
+    text-align: left;
+    color: white;
+}
+
+footer .logo {
+    display: inline-block;
+    margin-bottom: 2.4rem;
+}
+
+footer .logo svg {
+    width: 23.6rem;
+    height: 3.1rem;
+}
+
+footer p {
+    color: var(--brand-beige);
+    line-height: 2;
+    margin-bottom: 3.2rem;
+}
+
+footer .social-links {
+    justify-content: flex-start;
+}
+
+#backToTopBtn {
+    position: fixed;
+    bottom: 1rem;
+    right: 2.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(100%);
+    transition: 200ms;
+}
+
+#backToTopBtn.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+#backToTopBtn.onFooter circle {
+    fill: #fff;
+}
+
+#backToTopBtn.onFooter path {
+    stroke: var(--primary-color);
 }
