@@ -4,7 +4,32 @@ onScroll()
 function onScroll() {
     showNavOnScroll()
     showBackToTopBtn()
-    changeBackToTopBtnColor()
+    activeMenuAtCurrentSection(home)
+    activeMenuAtCurrentSection(services)
+    activeMenuAtCurrentSection(about)
+    activeMenuAtCurrentSection(contact)
+    changeBackToTopBtnColor(contact)
+}
+
+function activeMenuAtCurrentSection(section) {
+    const targetLine = scrollY + innerHeight / 2;
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.offsetHeight;
+
+    const sectionTopReachOrPassedTargetLine = targetLine >= sectionTop;
+
+    const sectionEndsAt = sectionTop + sectionHeight;
+    const sectionEndPassedTargetLine = sectionEndsAt <= targetLine;
+
+    const sectionBoundaries = sectionTopReachOrPassedTargetLine && !sectionEndPassedTargetLine;
+
+    const sectionId = section.getAttribute('id');
+    const menuElement = document.querySelector(`.menu a[href*=${sectionId}]`);
+
+    menuElement.classList.remove('active');
+    if (sectionBoundaries) {
+        menuElement.classList.add('active');
+    }
 }
 
 function showNavOnScroll() {
@@ -23,8 +48,17 @@ function showBackToTopBtn() {
     }
 }
 
-function changeBackToTopBtnColor() {
-    if (scrollY > 4400) {
+function changeBackToTopBtnColor(section) {
+    const targetLine = scrollY + (innerHeight - 20);
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.offsetHeight;
+
+    const sectionEndsAt = sectionTop + sectionHeight;
+    const sectionEndPassedTargetLine = sectionEndsAt <= targetLine;
+
+    const backToTopBtn = document.getElementById('backToTopBtn');
+
+    if (sectionEndPassedTargetLine) {
         backToTopBtn.classList.add('onFooter');
     } else {
         backToTopBtn.classList.remove('onFooter');
