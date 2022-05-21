@@ -1,6 +1,4 @@
 # DoctorCare
-### Project link: https://marlonjames99.github.io/Doctor_Care/
-
 ## Preview:
 <div align="center">
   
@@ -15,7 +13,9 @@ This is a webpage to a medical assistance company called "DoctorCare". The page 
 
 This project was made through the event "Next Level Week - Return", more specifically the "Origin" trail, presented by Rocketseat in may 2022.<br>
 
-Project's Figma: https://www.figma.com/file/jEDvA1jIw2rZgheBysEb5L/DoctorCare-(Community)?node-id=1729%3A616
+### Page link: https://marlonjames99.github.io/Doctor_Care/ <br>
+
+#### Project Figma: https://www.figma.com/file/jEDvA1jIw2rZgheBysEb5L/DoctorCare-(Community)?node-id=1729%3A616
 
 ## Tecnologies:
 <div style="display: inline_block">
